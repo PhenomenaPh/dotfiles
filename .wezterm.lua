@@ -40,9 +40,9 @@ config.color_scheme = "Catppuccin Mocha"
 config.hide_tab_bar_if_only_one_tab = true
 config.font_size = 14
 config.window_padding = {
-	left = 0,
+	left = 5,
 	right = 0,
-	top = 60,
+	top = 30,
 	bottom = 0,
 }
 config.window_decorations = "INTEGRATED_BUTTONS"
