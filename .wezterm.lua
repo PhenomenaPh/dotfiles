@@ -38,11 +38,11 @@ end
 config.font = wezterm.font("JetBrainsMono Nerd Font")
 config.color_scheme = "Catppuccin Mocha"
 config.hide_tab_bar_if_only_one_tab = true
-config.font_size = 14
+config.font_size = 13
 config.window_padding = {
 	left = 5,
 	right = 0,
-	top = 30,
+	top = 60,
 	bottom = 0,
 }
 config.window_decorations = "INTEGRATED_BUTTONS"

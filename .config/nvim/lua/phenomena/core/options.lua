@@ -1,4 +1,7 @@
 vim.cmd("let g:netrw_liststyle = 3")
+vim.cmd(
+	":set langmap=ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz"
+)
 
 local opt = vim.opt -- just for fun
 

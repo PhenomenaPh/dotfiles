@@ -90,3 +90,38 @@ export FZF_DEFAULT_OPTS=" \
 --color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8 \
 --color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc \
 --color=marker:#f5e0dc,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8"
+
+# poetry
+export PATH="$HOME/.local/bin:$PATH"
+
+# openssl
+export PATH="$HOMEBREW_PREFIX/opt/openssl@1.1/bin:$PATH"
+export DYLD_FALLBACK_LIBRARY_PATH="$HOMEBREW_PREFIX/opt/openssl@1.1/lib:$DYLD_FALLBACK_LIBRARY_PATH"
+
+# curl
+export PATH="$HOMEBREW_PREFIX/opt/curl/bin:$PATH"
+
+# zstd
+export LIBRARY_PATH="$HOMEBREW_PREFIX/opt/zstd/lib"
+
+
+pkgs=(openssl@3 curl readline librdkafka zlib freetds mysql-client zstd)
+for pkg in $pkgs; do
+    pkg_dir="$HOMEBREW_PREFIX/opt/$pkg"
+    
+    lib_dir="$pkg_dir/lib"
+
+    if [ -d "$lib_dir" ]; then
+        export LDFLAGS="$LDFLAGS -L$lib_dir"
+    fi
+    
+    include_dir="$pkg_dir/include"
+    if [ -d "$include_dir" ]; then
+        export CPPFLAGS="$CPPFLAGS -I$include_dir"
+    fi
+    
+    pkg_config_dir="$lib_dir/pkgconfig"
+    if [ -d "$pkg_config_dir" ]; then
+        export PKG_CONFIG_PATH="${PKG_CONFIG_PATH+$PKG_CONFIG_PATH:}$pkg_config_dir"
+    fi
+done

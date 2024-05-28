@@ -32,6 +32,14 @@ return {
 				opts.desc = "Go to declaration"
 				keymap.set("n", "gD", vim.lsp.buf.declaration, opts) -- go to declaration
 
+				opts.desc = "Inlay hint"
+				keymap.set(
+					"n",
+					"<leader>ih",
+					"<cmd>lua vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())<CR>",
+					opts
+				)
+
 				opts.desc = "Show LSP definitions"
 				keymap.set("n", "gd", "<cmd>Telescope lsp_definitions<CR>", opts) -- show lsp definitions
 
@@ -71,7 +79,6 @@ return {
 		local capabilities = cmp_nvim_lsp.default_capabilities()
 
 		-- Change the Diagnostic symbols in the sign column (gutter)
-		-- (not in youtube nvim video)
 		local signs = { Error = " ", Warn = " ", Hint = "󰠠 ", Info = " " }
 		for type, icon in pairs(signs) do
 			local hl = "DiagnosticSign" .. type
@@ -95,6 +102,7 @@ return {
 							diagnostics = {
 								globals = { "vim" },
 							},
+							hint = { enable = true },
 							completion = {
 								callSnippet = "Replace",
 							},
