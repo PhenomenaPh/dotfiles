@@ -110,10 +110,15 @@ return {
 					},
 				})
 			end,
-			["pyright"] = function()
+			["basedpyright"] = function()
 				-- configure pyright server (with special settings)
-				lspconfig["pyright"].setup({
+				lspconfig["basedpyright"].setup({
 					capabilities = capabilities,
+					settings = {
+						python = {
+							hint = { enable = true },
+						},
+					},
 					handlers = {
 						["textDocument/publishDiagnostics"] = function() end,
 					},

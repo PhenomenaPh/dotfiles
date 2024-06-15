@@ -28,7 +28,7 @@ return {
 			ensure_installed = {
 				"tsserver",
 				"lua_ls",
-				"pyright",
+				"basedpyright",
 			},
 		})
 

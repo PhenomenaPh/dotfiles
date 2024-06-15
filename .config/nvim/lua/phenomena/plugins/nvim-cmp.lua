@@ -1,6 +1,6 @@
 return {
 	"hrsh7th/nvim-cmp",
-	event = "InsertEnter",
+	event = {"InsertEnter", "CmdlineEnter"},
 	dependencies = {
 		"hrsh7th/cmp-buffer", -- source for text in buffer
 		"hrsh7th/cmp-path", -- source for file system paths
@@ -14,12 +14,14 @@ return {
 		"saadparwaiz1/cmp_luasnip", -- for autocompletion
 		"rafamadriz/friendly-snippets", -- useful snippets
 		"onsails/lspkind.nvim", -- vs-code like pictograms
+    "hrsh7th/cmp-cmdline",
+    "hrsh7th/cmp-nvim-lsp-signature-help"
 	},
 	config = function()
 		local cmp = require("cmp")
 
 		local luasnip = require("luasnip")
-
+    local cmp_autopairs = require("nvim-autopairs.completion.cmp")
 		local lspkind = require("lspkind")
 
 		-- loads vscode style snippets from installed plugins (e.g. friendly-snippets)
@@ -50,6 +52,7 @@ return {
 			-- sources for autocompletion
 			sources = cmp.config.sources({
 				{ name = "nvim_lsp" },
+        { name = 'nvim_lsp_signature_help'}, -- parameter hints
 				{ name = "luasnip" }, -- snippets
 				{ name = "buffer" }, -- text within current buffer
 				{ name = "path" }, -- file system paths
@@ -63,5 +66,16 @@ return {
 				}),
 			},
 		})
+
+    cmp.setup.cmdline(":", {
+      mapping = cmp.mapping.preset.cmdline(),
+      sources = cmp.config.sources({
+        { name = "path" },
+      }, {
+          { name = "cmdline" },
+        }),
+    })
+
+    cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
 	end,
 }

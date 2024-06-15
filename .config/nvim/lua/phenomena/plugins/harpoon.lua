@@ -52,10 +52,10 @@ return {
       }):find()
     end
 
-    vim.keymap.set("n", "<leader>a", function() harpoon:list():add() end)
+    vim.keymap.set("n", "<leader>ah", function() harpoon:list():add() end, { desc = "Add to harpoon"})
 
     -- basic telescope configuration
-    vim.keymap.set("n", "<C-e>", function() toggle_telescope(harpoon:list()) end,
+    vim.keymap.set("n", "<leader>hw", function() toggle_telescope(harpoon:list()) end,
       { desc = "Open harpoon window" })
 
 
